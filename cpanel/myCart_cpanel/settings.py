@@ -39,11 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
         # Your custom apps
      'product_management',
+     'rest_framework',
      'clients',
      'orders',
      'membership',
      'advertisements',
      'notification',
+     'customer_management',
+     'review_management',
 ]
 
 MIDDLEWARE = [
