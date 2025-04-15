@@ -29,8 +29,8 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = config("DEBUG",cast=bool)
 DEBUG = True
-
-ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
+ALLOWED_HOSTS = ['mycart-cpanel-1.onrender.com','localhost','127.0.0.1',]
+# ALLOWED_HOSTS = config("ALLOWED_HOSTS").split(",")
 
 
 # Application definition
