@@ -95,3 +95,18 @@ class OfferListCreateAPIView(generics.ListCreateAPIView):
     queryset = Offer.objects.all()
     serializer_class = OfferSerializer
 
+
+
+from rest_framework import generics
+from .models import Advertisement
+from .serializers import AdvertisementSerializer
+
+# List all advertisements / create new
+class AdvertisementListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdvertisementSerializer
+
+# Retrieve, update or delete an advertisement
+class AdvertisementRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Advertisement.objects.all()
+    serializer_class = AdvertisementSerializer
