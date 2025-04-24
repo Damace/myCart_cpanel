@@ -86,3 +86,12 @@ class AdvertisementByCategoryView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+
+from rest_framework import generics
+from .models import Offer
+from .serializers import OfferSerializer
+
+class OfferListCreateAPIView(generics.ListCreateAPIView):
+    queryset = Offer.objects.all()
+    serializer_class = OfferSerializer
+

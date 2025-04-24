@@ -63,6 +63,7 @@ urlpatterns = [
     path('', include('membership.urls')),
     path('', include('advertisements.urls')),
     path('advertisements/', include('advertisements.urls')),
+    # path('api/', include('offers.urls')),
     # path('notification/', include('notification.urls')),
     # path('api_reviews/', include(router.urls)),
 
@@ -77,9 +78,3 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-
-
-

@@ -31,16 +31,30 @@ class Supplier(models.Model):
 
 
 class Product(models.Model):
-    HOME_CATEGORY_CHOICES = [
+    CATEGORY_CHOICES = [
         ('all', 'All'),
-        ('clothes', 'Clothes'),
-        ('mobile_phone', 'Mobile Phone'),
-        ('computers', 'Computers'),
-        ('stationaries', 'Stationaries'),
+        ('women', 'Women'),
+        ('men', 'Men'),
+        ('kids', 'Kids'),
         ('sports', 'Sports'),
+        ('formal', 'Formal'),
         ('gadgets', 'Gadgets'),
+        ('clothing', 'Clothing'),
+        ('fashion', 'Fashion'),
+        ('electronics', 'electronics'),
+        ('stationeries', 'Stationeries'),
+        ('gender_gadgets', 'Gender_gadgets'),
+        ('kitchenware', 'Kitchenware'),
+        ('home_items', 'Home items'),
+        ('featured', 'Featured'),   
+        ('games', 'Games'),
+        ('books', 'Books'),
+        ('accessories', 'Accessories'),
+        ('handbags', 'Handbags'),
+        ('oils', 'Oils'),
+        ('other', 'other'),
     ]
-
+  
     CLOTH_CATEGORY_CHOICES = [
         ('empty', 'Empty'),
         ('men_clothing', 'Men Clothing'),
@@ -51,8 +65,7 @@ class Product(models.Model):
         ('gadgets', 'Gadgets'),
     ]
 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
-    home_category = models.CharField(max_length=20, choices=HOME_CATEGORY_CHOICES, default='all')
+    category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='all')
     cloth_category = models.CharField(max_length=20, choices=CLOTH_CATEGORY_CHOICES, default='empty' )
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)

@@ -24,4 +24,11 @@ urlpatterns = [
 
 ]
 
+from .views import OfferListCreateAPIView
+
+urlpatterns = [
+    path('offers/', OfferListCreateAPIView.as_view(), name='offer-list-create'),
+]
+
+
 

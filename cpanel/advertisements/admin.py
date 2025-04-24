@@ -39,3 +39,17 @@ class AdvertisementAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
         }),
     )
+
+from django.contrib import admin
+from .models import Offer
+
+@admin.register(Offer)
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('name',)  # Show name and image preview
+
+    def image_preview(self, obj):
+        if obj.image:
+            return f'<img src="{obj.image.url}" width="50" height="50" />'
+        return "-"
+    image_preview.allow_tags = True
+    image_preview.short_description = 'Image Preview'

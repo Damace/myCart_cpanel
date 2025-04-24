@@ -31,3 +31,10 @@ class Advertisement(models.Model):
     def __str__(self):
         return f"{self.title} - {self.category.name}"
 
+
+class Offer(models.Model):
+    name = models.CharField(max_length=255)
+    image = models.ImageField(upload_to='offers/')
+
+    def __str__(self):
+        return self.name
