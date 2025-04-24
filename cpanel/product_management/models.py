@@ -74,6 +74,7 @@ class Product(models.Model):
     image3 = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Additional image field 3
     description = models.TextField(blank=True)
     price = models.PositiveIntegerField(default=0)
+    unitTag = models.SlugField(max_length=100, blank=True, editable=False)
     discount = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=1)
     available = models.BooleanField(default=True)
@@ -94,6 +95,7 @@ class Product(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
+            self.unitTag = slugify(f"{self.price}")
         super().save(*args, **kwargs)
 
 
