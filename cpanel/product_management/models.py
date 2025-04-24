@@ -77,6 +77,7 @@ class Product(models.Model):
     discount = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=1)
     available = models.BooleanField(default=True)
+    rates = models.DecimalField(max_digits=3,decimal_places=2,default=0.0,help_text="Average rating from 0.0 to 5.0")
     orders = models.PositiveIntegerField(default=0)  # Number of orders for the product
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
