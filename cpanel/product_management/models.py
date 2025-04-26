@@ -51,7 +51,7 @@ class Product(models.Model):
         ('Books', 'Books'),
         ('Accessories', 'Accessories'),
         ('Handbags', 'Handbags'),
-        ('Oils', 'Oils'),
+        ('Discount', 'Discount'),
         ('Other', 'Other'),
     ]
   
