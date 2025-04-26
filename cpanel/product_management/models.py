@@ -69,12 +69,12 @@ class Product(models.Model):
     cloth_category = models.CharField(max_length=20, choices=CLOTH_CATEGORY_CHOICES, default='empty' )
     name = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    image = models.ImageField(upload_to='product_images/', blank=True)
-    image2 = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Additional image field 2
-    image3 = models.ImageField(upload_to='product_images/', blank=True, null=True)  # Additional image field 3
-    description = models.TextField(blank=True)
+    image = models.ImageField(upload_to='product_images/', blank=False)
+    image2 = models.ImageField(upload_to='product_images/', blank=False, null=True)  # Additional image field 2
+    image3 = models.ImageField(upload_to='product_images/', blank=False, null=True)  # Additional image field 3
+    description = models.TextField(blank=False)
     price = models.PositiveIntegerField(default=0)
-    unitTag = models.SlugField(max_length=100, blank=True, editable=False)
+    unitTag = models.SlugField(max_length=100,default=0,editable=False)
     discount = models.PositiveIntegerField(default=0)
     stock = models.PositiveIntegerField(default=1)
     available = models.BooleanField(default=True)
@@ -82,7 +82,7 @@ class Product(models.Model):
     orders = models.PositiveIntegerField(default=0)  # Number of orders for the product
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, blank=True)
+    supplier = models.ForeignKey(Supplier, on_delete=models.CASCADE, null=True, blank=False)
 
     class Meta:
         ordering = ('name',)
