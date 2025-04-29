@@ -50,3 +50,19 @@ class GoogleSignInSerializer(serializers.Serializer):
         )
 
         return user, profile
+
+from rest_framework import serializers
+from .models import ClientProfile
+
+class CustomerRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClientProfile
+
+        fields = ['full_name', 'phone_number', 'email', 'postal_code', 'address', 'password']
+
+    def create(self, validated_data):
+        return ClientProfile.objects.create(**validated_data)
+
+class CustomerLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
