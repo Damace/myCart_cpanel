@@ -166,8 +166,13 @@ class LoginCustomerView(APIView):
             except ClientProfile.DoesNotExist:
                 return Response({'error': 'Invalid email or password.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            if check_password(password, ClientProfile.password):
-                return Response({'message': 'Login successful!', 'customer_id': ClientProfile.id}, status=status.HTTP_200_OK)
+            if check_password(password, customer.password):
+                return Response({
+                    'message': 'Login successful!',
+                    'customer_id': customer.id,
+                    'full_name': customer.full_name,
+                    'email': customer.email,
+                }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid email or password.'}, status=status.HTTP_400_BAD_REQUEST)
         
