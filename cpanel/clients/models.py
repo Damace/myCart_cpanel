@@ -14,7 +14,7 @@ class ClientProfile(models.Model):
         # Encrypt the password before saving
         if not self.pk:  # Only hash when creating, not when updating
             self.password = make_password(self.password)
-        super(Customer, self).save(*args, **kwargs)
+        super(ClientProfile, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.full_name
