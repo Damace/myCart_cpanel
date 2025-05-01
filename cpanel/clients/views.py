@@ -148,11 +148,27 @@ from .serializers import CustomerRegisterSerializer, CustomerLoginSerializer
 
 class RegisterCustomerView(APIView):
     def post(self, request):
-        serializer = CustomerRegisterSerializer(data=request.data)
+        phone_number = request.data.get('phone_number')
+        
+        if not phone_number:
+            return Response({'error': 'Phone number is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            customer = ClientProfile.objects.get(phone_number=phone_number)
+            # Update existing customer
+            serializer = CustomerRegisterSerializer(customer, data=request.data, partial=True)
+            action = 'updated'
+        except ClientProfile.DoesNotExist:
+            # Create new customer
+            serializer = CustomerRegisterSerializer(data=request.data)
+            action = 'created'
+
         if serializer.is_valid():
             serializer.save()
-            return Response({'message': 'Customer registered successfully!'}, status=status.HTTP_201_CREATED)
+            return Response({'message': f'Customer {action} successfully!'}, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class LoginCustomerView(APIView):
     def post(self, request):
