@@ -40,3 +40,16 @@ class SubmitReviewView(APIView):
             serializer.save()
             return Response({'message': 'Review submitted successfully!', 'review': serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# reviews/views.py
+from rest_framework import generics
+from .models import Review
+from .serializers import ReviewSerializer
+
+class ProductReviewListAPIView(generics.ListAPIView):
+    serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        product_id = self.kwargs.get('product_id')
+        return Review.objects.filter(product__id=product_id)
