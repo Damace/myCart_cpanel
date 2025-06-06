@@ -1,5 +1,6 @@
 from django.db import models # type: ignore
 from django.utils.text import slugify # type: ignore
+from multiselectfield import MultiSelectField
 
 
 
@@ -43,9 +44,12 @@ class Product(models.Model):
         ('Fashion', 'Fashion'),
         ('Electronics', 'electronics'),
         ('Stationeries', 'Stationeries'),
+        ('Spare_parts', 'Spare parts'),
         ('Gender_gadgets', 'Gender_gadgets'),
         ('Kitchenware', 'Kitchenware'),
+        ('Hardware', 'Hardware'),
         ('Home_items', 'Home items'),
+        ('Innovation', 'Innovation'),
         ('Featured', 'Featured'),   
         ('Games', 'Games'),
         ('Books', 'Books'),
@@ -64,7 +68,29 @@ class Product(models.Model):
         ('Formal_workwear', 'Formal & Workwear'),
         ('Gadgets', 'Gadgets'),
     ]
-
+    
+    COLOR_CHOICES = [
+        ('Red', 'Red'),
+        ('Blue', 'Blue'),
+        ('Yellow', 'Yellow'),
+        ('Green', 'Green'),
+        ('Orange', 'Orange'),
+        ('Purple', 'Purple'),
+        ('Pink', 'Pink'),
+        ('Brown', 'Brown'),
+        ('Black', 'Black'),
+        ('White', 'White'),
+        ('Gray', 'Gray'),
+        ('Cyan', 'Cyan'),
+        ('Magenta', 'Magenta'),
+        ('Navy', 'Navy'),
+        ('Teal', 'Teal'),
+        ('Maroon', 'Maroon'),
+        ('Lime', 'Lime'),
+        ('Olive', 'Olive'),
+        ('Gold', 'Gold'),
+        ('Silver', 'Silver'),
+    ]
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='all')
     cloth_category = models.CharField(max_length=20, choices=CLOTH_CATEGORY_CHOICES, default='empty' )
     name = models.CharField(max_length=200, unique=True)
@@ -72,6 +98,7 @@ class Product(models.Model):
     image = models.ImageField(upload_to='product_images/', blank=False)
     image2 = models.ImageField(upload_to='product_images/', blank=False, null=True)  # Additional image field 2
     image3 = models.ImageField(upload_to='product_images/', blank=False, null=True)  # Additional image field 3
+    color = MultiSelectField(choices=COLOR_CHOICES, max_choices=10, max_length=100, blank=True)
     description = models.TextField(blank=False)
     price = models.PositiveIntegerField(default=0)
     unitTag = models.SlugField(max_length=100,default=0,editable=False)

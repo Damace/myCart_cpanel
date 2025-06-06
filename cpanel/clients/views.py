@@ -164,8 +164,12 @@ class RegisterCustomerView(APIView):
             action = 'created'
 
         if serializer.is_valid():
-            serializer.save()
-            return Response({'message': f'Customer {action} successfully!'}, status=status.HTTP_200_OK)
+            customer = serializer.save()
+            # Return serialized customer data in response
+            return Response({
+                'message': f'Customer {action} successfully!',
+                'customer': CustomerRegisterSerializer(customer).data
+            }, status=status.HTTP_200_OK)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -185,9 +189,7 @@ class LoginCustomerView(APIView):
             if check_password(password, customer.password):
                 return Response({
                     'message': 'Login successful!',
-                    'customer_id': customer.id,
-                    'full_name': customer.full_name,
-                    'email': customer.email,
+                    'customer': CustomerRegisterSerializer(customer).data  # ✅ Return full customer data
                 }, status=status.HTTP_200_OK)
             else:
                 return Response({'error': 'Invalid email or password.'}, status=status.HTTP_400_BAD_REQUEST)

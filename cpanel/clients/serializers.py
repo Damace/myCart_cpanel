@@ -63,6 +63,8 @@ class CustomerRegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return ClientProfile.objects.create(**validated_data)
 
+
+
 class CustomerLoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
-    password = serializers.CharField()
+    password = serializers.CharField(write_only=True)

@@ -51,6 +51,7 @@ INSTALLED_APPS = [
      'notification',
      'customer_management',
      'review_management',
+     'update',
 ]
 
 MIDDLEWARE = [
